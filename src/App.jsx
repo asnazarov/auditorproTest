@@ -1,51 +1,40 @@
 import React, {useState} from 'react';
-import *as XLSX from 'xlsx';
+import LoadingFileXlsx from "./components/LoadingFileXlsx";
 
 const App = () => {
   const [items, setItems] = useState([])
   const [valueInp, setValueInp] = useState('')
 
-  const readExcel = (file) => {
-    const promise = new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsArrayBuffer(file);
-      fileReader.onload = (e) => {
-        const bufferArray = e.target.result;
-        const wb = XLSX.read(bufferArray, {type: 'buffer'});
-        const wsname = wb.SheetNames[0]
-        const ws = wb.Sheets[wsname];
-        const data = XLSX.utils.sheet_to_json(ws);
-        resolve(data)
-      };
+  const onChangeInput = (e) => {
+    setValueInp(e.target.value)
+    console.log(e.target.value)
+  }
 
-      fileReader.onerror = (error) => {
-        reject(error)
-      };
-    });
-    promise.then((d) => {
-      setItems(d)
-    })
-  };
+  const onHandleInput = (e, obj) => {
+    console.log(e.target.value)
+  }
+
+  const paste = (e) => {
+    const newAr = e.clipboardData.getData('Text').split("\n")
+    newAr.pop()
+    setItems(newAr)
+  }
+  console.log(items)
 
   return (
     <div>
-      <input type="file" onChange={(e) => {
-        const file = e.target.files[0];
-        readExcel(file)
-      }}/>
+
       <ul>
         {
-          items.map((obj, index) =>
-            <li>
+          items.length !== 0 ?
+            items.map((item, index) => <li>
               <input
-                onChange={e => setValueInp(e.target.value)}
-                onClick={(e) => e.target.value === obj.fruit && setValueInp(obj.fruit)}
-                value={obj.fruit}
-                type="text"
-                key={index}
-              />
-            </li>
-          )
+                onChange={e => onChangeInput(e)}
+                onClick={e => onHandleInput(e)}
+                value={item} type="text"
+                key={index}/>
+            </li>)
+            : <li><input onPaste={e => paste(e)} type="text"/></li>
         }
       </ul>
 
