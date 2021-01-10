@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/auditorproTest/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/auditorproTest/static/js/main.aaf6c76f.chunk.js",
-    "main.js.map": "/auditorproTest/static/js/main.aaf6c76f.chunk.js.map",
+    "main.js": "/auditorproTest/static/js/main.6e08ef73.chunk.js",
+    "main.js.map": "/auditorproTest/static/js/main.6e08ef73.chunk.js.map",
     "runtime-main.js": "/auditorproTest/static/js/runtime-main.bf53cddd.js",
     "runtime-main.js.map": "/auditorproTest/static/js/runtime-main.bf53cddd.js.map",
-    "static/js/2.4b9bae4a.chunk.js": "/auditorproTest/static/js/2.4b9bae4a.chunk.js",
-    "static/js/2.4b9bae4a.chunk.js.map": "/auditorproTest/static/js/2.4b9bae4a.chunk.js.map",
+    "static/js/2.39d391a0.chunk.js": "/auditorproTest/static/js/2.39d391a0.chunk.js",
+    "static/js/2.39d391a0.chunk.js.map": "/auditorproTest/static/js/2.39d391a0.chunk.js.map",
     "index.html": "/auditorproTest/index.html",
     "static/css/main.6dea0f05.chunk.css.map": "/auditorproTest/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.4b9bae4a.chunk.js.LICENSE.txt": "/auditorproTest/static/js/2.4b9bae4a.chunk.js.LICENSE.txt"
+    "static/js/2.39d391a0.chunk.js.LICENSE.txt": "/auditorproTest/static/js/2.39d391a0.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.bf53cddd.js",
-    "static/js/2.4b9bae4a.chunk.js",
+    "static/js/2.39d391a0.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.aaf6c76f.chunk.js"
+    "static/js/main.6e08ef73.chunk.js"
   ]
 }
