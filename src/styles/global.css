@@ -1,0 +1,13 @@
+@import "./_spacing.css";
+
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #F2F7F9;
+}
+
+* {
+  box-sizing: border-box;
+}

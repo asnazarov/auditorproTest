@@ -1,0 +1,20 @@
+.card {
+  height: 158px;
+  width: 264px;
+  padding: 0;
+  border-radius: 10px;
+}
+
+.card__item {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.status {
+  height: 8px;
+  background: #A4D0E7;
+  border-radius: 10px 10px 0 0;
+}
+
+
