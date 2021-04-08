@@ -12,6 +12,8 @@
 .ml-auto {
   margin-left: auto;
 }
+
+
 .mr-5 {
   margin-right: 5px;
 }
@@ -22,4 +24,26 @@
 
 .mr-25 {
   margin-right: 25px;
+}
+
+
+
+.mt-15 {
+  margin-top: 15px;
+}
+
+.mt-25 {
+  margin-top: 25px;
+}
+
+.mb-5 {
+  margin-bottom: 5px;
+}
+
+.mb-15 {
+  margin-bottom: 15px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
 }

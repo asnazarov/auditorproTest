@@ -5,7 +5,7 @@ import fileSvg from './images/file.svg';
 import commentSvg from './images/comment.svg';
 import './main.css';
 import {ControlPanel} from "./control-panel/control-panel";
-import {DataCard} from "./modals/data-card";
+import {DataCard} from "./modals/data-card/data-card";
 
 const data = [
   {
@@ -13,10 +13,11 @@ const data = [
     photo: '',
     full_name: '11111111111',
     status_color: '#E1E5EB',
-    working_position: 'Второй помощник капитана',
+    // working_position: 'Второй помощник капитана',
+    working_position: '',
     characteristic: '',
     documents: [],
-    position: {x: 350, y: 200},
+    position: {x: 350, y: 50},
     user_data: [
       {
         id: 1,
@@ -97,6 +98,9 @@ export default () => {
   const onElementsRemove = (elementsToRemove) =>
     setElements((els) => removeElements(elementsToRemove, els));
   const onConnect = (params) => setElements((els) => addEdge(params, els));
+  const onNodeDragStop = (event, node) => {
+  console.log(node.position)
+  }
 
   const onSubmitName = (e) => {
     e.preventDefault()
@@ -145,11 +149,12 @@ export default () => {
 
   return (
     <>
-      <DataCard setOpen={setOpenModal} open={openModal} card={dataActiveCard}/>
+      {openModal && <DataCard setOpen={setOpenModal} open={openModal} card={dataActiveCard}/>}
       <ControlPanel/>
       <ReactFlow
         elements={elements}
         onElementsRemove={onElementsRemove}
+        onNodeDragStop={onNodeDragStop}
         onConnect={onConnect}
         className="cardssss"
         style={{
