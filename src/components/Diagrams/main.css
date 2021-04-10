@@ -1,10 +1,13 @@
 .card {
+  /*position: relative;*/
   height: 158px;
   width: 264px;
   padding: 0;
   border-radius: 10px;
   border: none;
   box-shadow: none !important;
+  background-color: #ffffff;
+  opacity: 1 !important;
 }
 
 .card__item {
@@ -19,4 +22,60 @@
   border-radius: 10px 10px 0 0;
 }
 
+.card__add {
+  position: absolute;
+  opacity: 0;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  background: #EBEFF2;
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  visibility: visible;
+  transition: 2s opacity, .55s visibility;
+}
+.card__add:active {
+  background: rgba(55, 53, 48, 0.2);
+}
 
+.card__add_left {
+  top: 50%;
+  left: -12px;
+  transform: translate(-100%, -50%);
+}
+
+.card__add_bottom {
+  left: 50%;
+  bottom: -12px;
+  transform: translate(-50%, 100%);
+}
+.card:hover .card__add {
+  opacity: 1;
+  visibility: visible;
+  transition: .55s opacity, 1s visibility;
+
+}
+.card__add_right {
+  top: 50%;
+  right: -12px;
+  transform: translate(100%, -50%);
+}
+
+
+.react-flow__node-input .react-flow__handle {
+  /*background: transparent !important;*/
+  bottom: 0;
+}
+
+.react-flow__handle-bottom {
+  /*left: 1000%;*/
+  border: none;
+}
+
+.react-flow__handle-top {
+  top: 0;
+  border: none;
+}

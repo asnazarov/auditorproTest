@@ -53,7 +53,7 @@ export const DataCard = ({setOpen, open = false, card}) => {
         onClose={handleClose}
       >
         <div className="modal">
-          <div className="status" style={{background: card.status_color}}/>
+          <div className="status" style={{background: card?.status_color}}/>
           {/*<div onClick={handleClose}>X</div>*/}
           <div className="modal__item">
             <img className="modal__menu" src={kebabMenu} alt="menu"/>
