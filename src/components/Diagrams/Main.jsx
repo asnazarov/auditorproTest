@@ -361,6 +361,64 @@ let connectLine = [
 ]
 const getNodeId = () => `randomnode_${+new Date()}`;
 
+let organigramms = [
+  {
+    id: 0,
+    order_id: 1,
+    name: '',
+    type: 0,
+    connect_line: 0,
+    base_color: '',
+    items: [
+      {
+        id: '',
+        full_name: '',
+        data: { label: 'Node A' },
+        status: {
+          status_color: '',
+          status_name: [''],
+          closing_date: '',
+        },
+        position: {x: 350, y: 50},
+        call_sign: '',
+        working_position: '',
+        characteristic: '',
+        documents: [],
+        user_data: [
+          {
+            id: 1,
+            icon: '',
+            order_id: 1,
+            title: 'Департамент',
+            description: '',
+          },
+          {
+            id: 2,
+            icon: '',
+            order_id: 2,
+            title: 'Дата рождения',
+            description: '',
+          },
+          {
+            id: 3,
+            icon: '',
+            order_id: 3,
+            title: 'Телефон',
+            description: '',
+          },
+          {
+            id: 4,
+            icon: '',
+            order_id: 4,
+            title: 'Почта',
+            description: '',
+          },
+        ],
+      }
+    ]
+  }
+]
+
 let initialElements = [
   {
     id: '1',
@@ -506,27 +564,56 @@ export default () => {
   // const onEdgeUpdate = (oldEdge, newConnection) =>
   //   setElements((els) => updateEdge(oldEdge, newConnection, els));
 
-  const onAdd = (event, card) => {
+  const onAddBottom = (event, card) => {
     const heightElem = event.nativeEvent.path[1].clientHeight
-    console.log(event.nativeEvent.path[1].clientHeight)
-    // console.log(event.target.parentElement)
     // console.log(event)
-    console.log(elements)
-
     console.log(card)
     const newNode = {
       id: getNodeId(),
-      data: { label: returnLabel(card) },
+      data: { label: returnLabel() },
       position: {
         x: card.position.x,
-        y: card.position.y + 300,
+        y: card.position.y + 250,
       },
       type: 'input',
       className: "card",
     };
+    const newInitialElement = {
+      ...newNode,
+      user_data: [
+        {
+          id: 1,
+          icon: '',
+          title: 'Департамент',
+          description: '',
+        },
+        {
+          id: 2,
+          icon: '',
+          title: 'Дата рождения',
+          description: '',
+        },
+        {
+          id: 3,
+          icon: '',
+          title: 'Телефон',
+          description: '',
+        },
+        {
+          id: 4,
+          icon: '',
+          title: 'Почта',
+          description: '',
+        },
+      ],
+      status_color: "#07b89d",
+      full_name: 'Без имени',
+    }
+    initialElements = [...initialElements, newInitialElement]
+
     setElements((els) => els.concat(newNode));
   };
-
+console.log(initialElements)
   const handleDoubleClickCard = (card) => {
     setOpenModal(true);
     setDataActiveCard(card)
@@ -542,11 +629,12 @@ export default () => {
     return (
       <>
         <div
-          onDoubleClick={() => handleDoubleClickCard(card)}
+          onDoubleClick={() => handleDoubleClickCard(card, indexCard)}
           // onMouseEnter={(e) => setMouseEnterLeave(true)}
           // onMouseLeave={(e) => setMouseEnterLeave(false)}
+          key={indexCard}
         >
-          <div className="status" style={{background: card.status_color}}/>
+          <div className="status" style={{background: card?.status_color}}/>
           <div className="card__item">
             <img src={avatarJob} alt="avatar"/>
             {/*{(data.length === 1 && card.full_name === '') ?*/}
@@ -557,7 +645,7 @@ export default () => {
               </form>
             </div>
             : <div>
-            <p>{card.full_name}</p>
+            <p>{card?.full_name}</p>
             {/*<p>{card.working_position}</p>*/}
           </div>
             {/*}*/}
@@ -569,7 +657,7 @@ export default () => {
           </div>
         </div>
         <button className="card__add card__add_left">+</button>
-        <button className="card__add card__add_bottom" onClick={(event) =>onAdd(event, card)}>+</button>
+        <button className="card__add card__add_bottom" onClick={(event) =>onAddBottom(event, card)}>+</button>
         <button className="card__add card__add_right">+</button>
         <Handle
           type="target"
@@ -596,11 +684,11 @@ export default () => {
   }
 
   useEffect(() => {
-    let items = initialElements.map(card => {
+    let items = initialElements.map((card, index) => {
       return ({
         id: card.id,
         position: card.position,
-        data: {label: returnLabel(card)},
+        data: {label: returnLabel(card, index)},
         type: 'input',
         className: "card",
       })
@@ -617,6 +705,7 @@ export default () => {
       {openModal && <DataCard setOpen={setOpenModal} open={openModal} card={dataActiveCard}/>}
       <ControlPanel/>
       <ReactFlow
+        id="flow"
         elements={elements}
         onLoad={onLoad}
         snapToGrid
