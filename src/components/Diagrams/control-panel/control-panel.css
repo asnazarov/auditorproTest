@@ -21,3 +21,17 @@
   box-shadow: 0 2px 6px rgba(93, 105, 124, 0.2);
   border-radius: 8px;
 }
+
+.controlPanel__text {
+  font-family: SF Pro Display, sans-serif;
+  user-select: none;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  color: #373530;
+  margin: 0;
+  padding: 0;
+}

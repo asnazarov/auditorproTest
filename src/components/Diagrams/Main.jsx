@@ -1,7 +1,5 @@
 // import React, {useEffect, useState} from 'react';
 // import ReactFlow, {removeElements, addEdge, Handle} from 'react-flow-renderer';
-// import avatarJob from './images/avatar-job.jpg';
-// import fileSvg from './images/file.svg';
 // import commentSvg from './images/comment.svg';
 // import './main.css';
 // import {ControlPanel} from "./control-panel/control-panel";
@@ -142,7 +140,7 @@
 // //         <>
 // //           <div className="status"/>
 // //           <div className="card__item">
-// //             <img src={avatarJob} alt="avatar"/>
+// //             <img src={avatarJobSvg} alt="avatar"/>
 // //             <div>
 // //               <p>Владислав</p>
 // //               <p>Константинов</p>
@@ -351,81 +349,114 @@
 
 import React, {useCallback, useEffect, useState} from 'react';
 import ReactFlow, {Controls, updateEdge, addEdge, Handle} from 'react-flow-renderer';
+import {TooltipBtn, useStyles} from './ui/tooltip/material-ui-styles'
+import Button from '@material-ui/core/Button'
 import './main.css';
 import {ControlPanel} from "./control-panel/control-panel";
 import {DataCard} from "./modals/data-card/data-card";
-import {avatarJob} from "./images";
+import {avatarJobJpg, commentSvg, fileSvg} from "./images";
+import {Save, saveType} from "./modals/save/save";
 
 let connectLine = [
-  {id: 'e1-2', source: '1', target: '2', label: 'заметка', type: 'smoothstep',},
+  {id: 'e1-2', source: '1', target: '2', type: 'smoothstep',},
 ]
 const getNodeId = () => `randomnode_${+new Date()}`;
 
-let organigramms = [
-  {
-    id: 0,
-    order_id: 1,
-    name: '',
-    type: 0,
-    connect_line: 0,
-    base_color: '',
-    items: [
-      {
-        id: '',
-        full_name: '',
-        data: { label: 'Node A' },
-        status: {
-          status_color: '',
-          status_name: [''],
-          closing_date: '',
+let user = {
+  mail: 'affa@adas.ru',
+
+  organigramms: [
+    {
+      id: 0,
+      order_id: 1,
+      name: '',
+      type: '',  // top-bottom, bottom-top, left-right, right-left
+      connect_line: 'smoothstep',  //  'default', 'straight', 'step','smoothstep'
+      base_color: '',
+    }
+  ],
+  items: [
+    {
+      id: 0,
+      full_name: '',
+      data: {label: 'Node A'},
+      color_card: '',  // получить с бека organigramms.base_color
+      status: {
+        status_name: '',
+        closing_date: '',
+      },
+      position: {x: 350, y: 50},
+      photo: '',
+      call_sign: '',
+      working_position: '',
+      comments: '',
+      documents: [],
+    }
+  ],
+  items_detail: [
+    {
+      item_id: 0,
+      full_name: '',
+      working_position: '',
+      comments: '',
+      documents: [],
+      color_card: '',
+      status: {
+        status_name: '',
+        closing_date: '',
+      },
+      call_sign: '',
+      photo: '',
+      user_data: [
+        {
+          id: 1,
+          icon: '',
+          order_id: 1,
+          title: 'Департамент',
+          description: '',
         },
-        position: {x: 350, y: 50},
-        call_sign: '',
-        working_position: '',
-        characteristic: '',
-        documents: [],
-        user_data: [
-          {
-            id: 1,
-            icon: '',
-            order_id: 1,
-            title: 'Департамент',
-            description: '',
-          },
-          {
-            id: 2,
-            icon: '',
-            order_id: 2,
-            title: 'Дата рождения',
-            description: '',
-          },
-          {
-            id: 3,
-            icon: '',
-            order_id: 3,
-            title: 'Телефон',
-            description: '',
-          },
-          {
-            id: 4,
-            icon: '',
-            order_id: 4,
-            title: 'Почта',
-            description: '',
-          },
-        ],
-      }
-    ]
-  }
-]
+        {
+          id: 2,
+          icon: '',
+          order_id: 2,
+          title: 'Дата рождения',
+          description: '',
+        },
+        {
+          id: 3,
+          icon: '',
+          order_id: 3,
+          title: 'Телефон',
+          description: '',
+        },
+        {
+          id: 4,
+          icon: '',
+          order_id: 4,
+          title: 'Почта',
+          description: '',
+        },
+      ]
+    },
+  ],
+  connectLine: [
+    {
+      id: '',
+      source: '1',
+      target: '2',
+      type: 'smoothstep',
+    }
+  ]
+}
+
 
 let initialElements = [
   {
     id: '1',
-    full_name: 'Петя',
-    data: { label: 'Node A' },
+    full_name: '',
+    data: {label: 'Node A'},
     status_color: '#E1E5EB',
-    position: {x: 350, y: 50},
+    position: {x: 750, y: 50},
     user_data: [
       {
         id: 1,
@@ -456,7 +487,7 @@ let initialElements = [
   {
     id: '2',
     full_name: 'Миша',
-    data: { label: 'Node A' },
+    data: {label: 'Node A'},
     status_color: '#29c31a',
     position: {x: 128, y: 278},
     user_data: [
@@ -488,8 +519,8 @@ let initialElements = [
   },
   {
     id: '3',
-    full_name: 'Вася',
-    data: { label: 'Node A' },
+    full_name: 'Вася Петров',
+    data: {label: 'Node A'},
     status_color: '#07b89d',
     position: {x: 637, y: 278},
     user_data: [
@@ -519,48 +550,50 @@ let initialElements = [
       },
     ],
   },
-  {
-    id: '4',
-    full_name: 'Жора',
-    data: { label: 'Node A' },
-    status_color: '#07b89d',
-    position: {x: 637, y: 578},
-    user_data: [
-      {
-        id: 1,
-        icon: '',
-        title: 'Департамент',
-        description: '',
-      },
-      {
-        id: 2,
-        icon: '',
-        title: 'Дата рождения',
-        description: '',
-      },
-      {
-        id: 3,
-        icon: '',
-        title: 'Телефон',
-        description: '',
-      },
-      {
-        id: 4,
-        icon: '',
-        title: 'Почта',
-        description: '',
-      },
-    ],
-  },
+  // {
+  //   id: '4',
+  //   full_name: 'Жора',
+  //   data: { label: 'Node A' },
+  //   status_color: '#07b89d',
+  //   position: {x: 637, y: 578},
+  //   user_data: [
+  //     {
+  //       id: 1,
+  //       icon: '',
+  //       title: 'Департамент',
+  //       description: '',
+  //     },
+  //     {
+  //       id: 2,
+  //       icon: '',
+  //       title: 'Дата рождения',
+  //       description: '',
+  //     },
+  //     {
+  //       id: 3,
+  //       icon: '',
+  //       title: 'Телефон',
+  //       description: '',
+  //     },
+  //     {
+  //       id: 4,
+  //       icon: '',
+  //       title: 'Почта',
+  //       description: '',
+  //     },
+  //   ],
+  // },
 ];
 const onLoad = (reactFlowInstance) => reactFlowInstance.fitView();
 
 export default () => {
-
+  const classes = useStyles()
   // const [elements, setElements] = useState(initialElements.concat(connectLine));
   const [elements, setElements] = useState([]);
+  const [isDraggable, setIsDraggable] = useState(true);
   const [dataActiveCard, setDataActiveCard] = useState({})
-  const [openModal, setOpenModal] = React.useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [inputFocus, setInputFocus] = useState(false)
   // const onEdgeUpdate = (oldEdge, newConnection) =>
   //   setElements((els) => updateEdge(oldEdge, newConnection, els));
 
@@ -570,7 +603,7 @@ export default () => {
     console.log(card)
     const newNode = {
       id: getNodeId(),
-      data: { label: returnLabel() },
+      data: {label: returnLabel()},
       position: {
         x: card.position.x,
         y: card.position.y + 250,
@@ -613,7 +646,7 @@ export default () => {
 
     setElements((els) => els.concat(newNode));
   };
-console.log(initialElements)
+
   const handleDoubleClickCard = (card) => {
     setOpenModal(true);
     setDataActiveCard(card)
@@ -624,6 +657,21 @@ console.log(initialElements)
     setElements((els) => addEdge(params, els))
   };
 
+  const onSubmitName = (e) => {
+    e.preventDefault()
+    e.target[0].blur()
+    setIsDraggable(true)
+    setInputFocus(false)
+  }
+
+  const onHandleInput = (card) => {
+    setIsDraggable(false)
+    // const currentCardIndex = elements.findIndex(item => console.log(item))
+    // const inputCard = elements[currentCardIndex]
+    setInputFocus(true)
+  }
+
+  console.log(elements)
   const returnLabel = (card, indexCard) => {
 
     return (
@@ -636,28 +684,40 @@ console.log(initialElements)
         >
           <div className="status" style={{background: card?.status_color}}/>
           <div className="card__item">
-            <img src={avatarJob} alt="avatar"/>
-            {/*{(data.length === 1 && card.full_name === '') ?*/}
-            <div>
-              {/*<form onSubmit={onSubmitName}>*/}
-              <form>
-                <input placeholder="Имя и фамилия"/>
-              </form>
-            </div>
-            : <div>
-            <p>{card?.full_name}</p>
-            {/*<p>{card.working_position}</p>*/}
+            <img src={avatarJobJpg} alt="avatar"/>
+            {(initialElements.length === 1 || card?.full_name === '') ?
+              <div>
+                <form onSubmit={onSubmitName}>
+                  {/*<form>*/}
+                  <input
+                    className="card__input"
+                    onFocus={() => onHandleInput(card)}
+                    placeholder="Имя и фамилия"/>
+                </form>
+              </div>
+              : <div>
+                <p>{card?.full_name}</p>
+                {/*<p>{card.working_position}</p>*/}
+              </div>
+            }
           </div>
-            {/*}*/}
+          <div className="card__item" style={{display: 'flex'}}>
+            <TooltipBtn title='Комментарий' enterDelay={400}>
+              <Button style={{minWidth: 20, background: 'transparent', padding: 0}}>
+                <img className="card__svg" src={commentSvg} alt="comment"/>
+              </Button>
+            </TooltipBtn>
+            <TooltipBtn title='Документы' enterDelay={400}>
+              <Button style={{minWidth: 20, background: 'transparent', padding: 0, marginLeft: 4}}>
+                <img className="card__svg" src={fileSvg} alt="file"/>
+              </Button>
+            </TooltipBtn>
+            <p style={{margin: '0px 0px 0px auto'}}>А56</p>
           </div>
-          <div style={{display: 'flex'}}>
-            {/*<img src={commentSvg} alt="comment"/>*/}
-            {/*<img src={fileSvg} alt="file"/>*/}
-            <p style={{margin: 0}}>А56</p>
-          </div>
+          {inputFocus && <Save type={saveType.card} setInputFocus={setInputFocus} text="Готово"/>}
         </div>
         <button className="card__add card__add_left">+</button>
-        <button className="card__add card__add_bottom" onClick={(event) =>onAddBottom(event, card)}>+</button>
+        <button className="card__add card__add_bottom" onClick={(event) => onAddBottom(event, card)}>+</button>
         <button className="card__add card__add_right">+</button>
         <Handle
           type="target"
@@ -683,12 +743,14 @@ console.log(initialElements)
     )
   }
 
+  // const [elements, setElements] = useState([]);
   useEffect(() => {
     let items = initialElements.map((card, index) => {
       return ({
         id: card.id,
         position: card.position,
         data: {label: returnLabel(card, index)},
+        inputFocus: false,
         type: 'input',
         className: "card",
       })
@@ -697,7 +759,7 @@ console.log(initialElements)
     items = items.concat(connectLine)
 //     console.log('items', items)
     setElements(items)
-  }, [initialElements])
+  }, [initialElements, inputFocus])
 
   return (
     <>
@@ -709,8 +771,9 @@ console.log(initialElements)
         elements={elements}
         onLoad={onLoad}
         snapToGrid
-        snapGrid={[10,10]}
+        snapGrid={[10, 10]}
         defaultZoom={0.8}
+        nodesDraggable={isDraggable}
         minZoom={0.3}
         maxZoom={2}
         // onEdgeUpdate={onEdgeUpdate}
@@ -720,7 +783,7 @@ console.log(initialElements)
           height: "80vh",
           // border: "1px solid red"
         }}
-        deleteKeyCode={46} /* 'delete'-key */
+        // deleteKeyCode={46} /* 'delete'-key */
       >
         qwe
         <Controls/>

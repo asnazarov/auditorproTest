@@ -1,32 +1,43 @@
 import React from "react";
 import './save.css';
-import {closeSave} from "../../images";
+import {closeSaveSvg} from "../../images";
+import clsx from "clsx";
 
 export const saveType = {
   textarea: 'textarea',
   card: 'card',
 }
 
-export const Save = ({type, setTextareaFocus}) => {
+export const Save = ({
+                       type,
+                       text,
+                       className,
+                       setTextareaFocus,
+                       setInputFocus,
+                     }) => {
 
   switch (type) {
     case saveType.textarea :
       return (
         <div className="d-flex align-items-center mt-15">
+          <button
+            className="save-btn save-btn_textarea"
+          >{text}</button>
+          <img
+            onClick={() => setTextareaFocus(false)}
+            className="ml-15 cup"
+            src={closeSaveSvg} alt="close"/>
+        </div>
+      )
+    case saveType.card :
+      return (
+        <div className={clsx(className, "d-flex align-items-center mt-25")}>
             <button
-              style={{
-              padding: "12px 20px",
-              background: '#53A9D7',
-              borderRadius: 8,
-              outline: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              color: 'white'
-            }} >Сохранить</button>
+              className="save-btn save-btn_card"
+            >{text}</button>
             <img
-              onClick={() => setTextareaFocus(false)}
-              className="ml-15 cup"
-              src={closeSave} alt="close"/>
+              className="ml-10 cup"
+              src={closeSaveSvg} alt="close"/>
         </div>
       )
   }

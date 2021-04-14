@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import './data-card.css'
-import {ava, documents, kebabMenu, messageCircle} from "../../images";
+import {ava, documentsSvg, kebabMenuSvg, messageCircleSvg} from "../../images";
 import {Save, saveType} from "../save/save";
 
 // function rand() {
@@ -56,12 +56,12 @@ export const DataCard = ({setOpen, open = false, card}) => {
           <div className="status" style={{background: card?.status_color}}/>
           {/*<div onClick={handleClose}>X</div>*/}
           <div className="modal__item">
-            <img className="modal__menu" src={kebabMenu} alt="menu"/>
+            <img className="modal__menu" src={kebabMenuSvg} alt="menu"/>
             <div className="d-flex mt-15 mb-30">
               <img src={ava} alt="avatar"/>
               <div className="ml-15">
-                <h2 className="modal__title">{card?.full_name}</h2>
-                <input defaultValue={card?.working_position} placeholder="Должность"/>
+                <input className="modal__input" defaultValue={card?.full_name}/>
+                <input className="modal__input" defaultValue={card?.working_position} placeholder="Должность"/>
               </div>
             </div>
             {
@@ -88,7 +88,7 @@ export const DataCard = ({setOpen, open = false, card}) => {
               <p className="modal__text">Добавить</p>
             </div>
             <h4 className="mt-25 mb-15 d-flex align-items-center ">
-              <span className="d-flex align-items-center"><img src={messageCircle} alt="message"/></span>
+              <span className="d-flex align-items-center"><img src={messageCircleSvg} alt="message"/></span>
               Характеристики
             </h4>
             <textarea
@@ -104,9 +104,9 @@ export const DataCard = ({setOpen, open = false, card}) => {
               }}
               name="" id="" cols="10" rows="4"
             />
-            {textareaFocus && <Save type={saveType.textarea} setTextareaFocus={setTextareaFocus}/>}
+            {textareaFocus && <Save type={saveType.textarea} setTextareaFocus={setTextareaFocus} text="Готово"/>}
             <h4 className="mt-25 mb-15 d-flex align-items-center ">
-              <span className="d-flex align-items-center"><img src={documents} alt="doc"/></span>
+              <span className="d-flex align-items-center"><img src={documentsSvg} alt="doc"/></span>
               Документы
             </h4>
             <div className="d-flex align-items-center mb-5">

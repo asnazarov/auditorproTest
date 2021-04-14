@@ -1,0 +1,50 @@
+.mod-orgm {
+  position: absolute;
+  left: 0;
+  top: 70px;
+  z-index: 10;
+  padding: 18px 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(93, 105, 124, 0.2);
+  border-radius: 8px;
+}
+
+.mod-orgm__text {
+  padding: 8px;
+  margin: 0;
+  font-family: SF Pro Display, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.mod-orgm__text_choice {
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.mod-orgm__text_bark {
+  cursor: pointer;
+  transition: .3s;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  color: #373530;
+}
+.mod-orgm__text_bark:hover {
+  border-radius: 4px;
+  background-color: #EBEFF2;
+}
+
+.mod-orgm__text_create {
+  cursor: pointer;
+  color: #878F93;
+}
+
+.mod-orgm__text_create:hover {
+  color:  #5a6265;
+  transition: .3s;
+}

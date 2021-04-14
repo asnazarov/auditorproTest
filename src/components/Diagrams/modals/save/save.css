@@ -1,0 +1,31 @@
+.save-btn {
+  background: #53A9D7;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: .4s;
+}
+
+.save-btn:hover {
+  background: #1D8BC5;
+  transition: .4s;
+}
+
+.save-btn_textarea {
+  padding: 12px 20px;
+}
+
+.save-btn_card {
+  padding: 12px 14px;
+}
+
+.create-orgm {
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+}

@@ -1,21 +1,23 @@
-import arrowDown from './arrow-down.svg';
-import circle from './circle.svg';
-import download from './download.svg';
-import menu from './menu.svg';
-import printer from './printer.svg';
-import share from './share.svg';
-import briefcase from './briefcase.svg';
-import userCheck from './user-check.svg';
-import filter from './filter.svg';
+import arrowDownSvg from './arrow-down.svg';
+import circleSvg from './circle.svg';
+import downloadSvg from './download.svg';
+import menuSvg from './menu.svg';
+import printerSvg from './printer.svg';
+import shareSvg from './share.svg';
+import briefcaseSvg from './briefcase.svg';
+import userCheckSvg from './user-check.svg';
+import filterSvg from './filter.svg';
+import plusSvg from './plus.svg';
 
 export {
-  arrowDown,
-  circle,
-  download,
-  menu,
-  printer,
-  share,
-  briefcase,
-  userCheck,
-  filter,
+  arrowDownSvg,
+  circleSvg,
+  downloadSvg,
+  menuSvg,
+  printerSvg,
+  shareSvg,
+  briefcaseSvg,
+  userCheckSvg,
+  filterSvg,
+  plusSvg,
 }

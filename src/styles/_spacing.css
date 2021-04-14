@@ -36,6 +36,10 @@
   margin-top: 25px;
 }
 
+.mt-35 {
+  margin-top: 35px;
+}
+
 .mb-5 {
   margin-bottom: 5px;
 }
@@ -46,4 +50,9 @@
 
 .mb-30 {
   margin-bottom: 30px;
+}
+
+
+.p-10 {
+  padding: 10px;
 }

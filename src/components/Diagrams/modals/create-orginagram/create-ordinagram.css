@@ -1,0 +1,63 @@
+.crt-orgm {
+  position: relative;
+  width: 320px !important;
+  min-height: 100px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  margin: 0;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.crt-orgm__input {
+  display: block;
+  border: none;
+  width: 100%;
+  height: 50px;
+  outline: none;
+  font-family: SF Pro Display, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  color: #373530;
+}
+
+.crt-orgm__input::placeholder {
+  padding-left: 3px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 18px;
+  color: #878F93;
+}
+
+.crt-orgm__text {
+  margin: 0;
+  padding: 0;
+  font-family: SF Pro Display, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  color: #878F93;
+}
+
+.crt-orgm__arrow {
+  min-height: 42px;
+  width: 64px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #EBEFF2;
+  border-radius: 8px;
+}
+
+.crt-orgm__arrow:focus {
+  border: 1.5px solid #1D8BC5;
+  background-color: red;
+  outline: none;
+}
